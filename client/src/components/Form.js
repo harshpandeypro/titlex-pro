@@ -11,7 +11,8 @@ const Form = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:5000/generate-title", {
+      const url = process.env.REACT_APP_BACKEND_URL + "/generate-title";
+      const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
