@@ -4,13 +4,13 @@ const cors = require("cors");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const app = express();
 const port = 5000;
+require("dotenv").config({ path: ".env.local" });
 
-const API_KEY = "AIzaSyAvz3FtQ9SQ4idRIP7vuB9Yi4BnYJBjAGM";
-// const API_KEY = process.env.REACT_APP_API_KEY;
+const apiKey = process.env.GEMINI_API_KEY;
 
 app.use(cors());
 app.use(express.json());
-const genAI = new GoogleGenerativeAI(API_KEY);
+const genAI = new GoogleGenerativeAI(apiKey.toString());
 
 app.get("/", async (req, res) => {
   res.status(200).send({
