@@ -42,6 +42,7 @@ const Form = () => {
     setTitle("");
     setDescription("");
     setOutput("");
+    setLoading(false);
   };
 
   return (
