@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import "./Form2.css";
+import electric from "../images/electric-grey.svg";
 import Spinner from "./Spinner";
 
-const Form = () => {
+const Form2 = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [output, setOutput] = useState("");
@@ -38,23 +40,19 @@ const Form = () => {
     }
   };
 
-  const clearHandler = () => {
-    setTitle("");
-    setDescription("");
-    setOutput("");
-    setLoading(false);
-  };
-
   return (
-    <>
-      <div className="container">
-        <div className="row align-items-center">
-          <div className="col-4">
-            <h1>Titlex</h1>
-            <form id="form" onSubmit={submitHandler} className="my-3">
-              <div className="my-3">
+    <div>
+      <div className="container flex">
+        <div className="left flex">
+          <h1>Titlex Pro</h1>
+          <p id="intro-description">Your AI Video Title Generator</p>
+        </div>
+        <div className="right flex">
+          <div className="box flex">
+            <form id="form" onSubmit={submitHandler} className="flex">
+              <div className="form-title">
                 <label htmlFor="title" className="form-label">
-                  Title:
+                  Enter Your Title:
                 </label>
                 <input
                   type="text"
@@ -62,57 +60,65 @@ const Form = () => {
                   name="title"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
+                  placeholder="e.g I tried to fight a lion"
                   required
-                  className="form-control"
-                  placeholder="Enter your title"
                 />
               </div>
 
-              <div className="my-3">
+              <div className="form-description">
                 <label htmlFor="description" className="form-label">
-                  Description:
+                  Describe Your Video:
                 </label>
                 <textarea
                   id="description"
                   name="description"
+                  placeholder="What's the video about?"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  placeholder="What's your video about?"
                   required
                   className="form-control"
                   rows="4"
                 ></textarea>
               </div>
-
-              <button type="submit" className="btn btn-primary">
-                Generate
-              </button>
-              <button
-                type="submit"
-                className="btn btn-secondary mx-2"
-                onClick={clearHandler}
-              >
-                Clear
+              <button type="submit" className="submit-button flex">
+                Generate <img className="electric-img" src={electric} alt="" />
               </button>
             </form>
+            <div className="result">
+              <h3>Result :</h3>
+              <div className="output-box flex">
+                <div className="output-left flex">
+                  <h4>Input Title</h4>
 
-            <h3>Your Output:</h3>
-            <div className="row ">
-              <div className="col-6 border">
-                <h5>Your Title</h5>
-                <p>{title}</p>
-              </div>
-              <div className="col-6 border">
-                <h5>Generated Title</h5>
-                <p>{loading && <Spinner />}</p>
-                <p>{output}</p>
+                  <p>{title === "" ? "What's your video title?" : title}</p>
+                </div>
+                <div className="output-right flex">
+                  <h4>Generated Title</h4>
+                  {/* {loading && <Spinner />}
+
+                  <p>
+                    {output === ""
+                      ? "Here's a better title suggestion"
+                      : output}
+                  </p> */}
+
+                  {loading ? (
+                    <Spinner />
+                  ) : (
+                    <p>
+                      {output === ""
+                        ? "Here's a better title suggestion"
+                        : output}
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
-export default Form;
+export default Form2;
